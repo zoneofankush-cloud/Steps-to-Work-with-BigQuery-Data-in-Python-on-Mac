@@ -1,8 +1,43 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2867
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+Steps to Work with BigQuery Data in Python on Mac
+Install Required Python Libraries
+1. pip install google-cloud-bigquery pandas db-dtypes
+2. brew install --cask google-cloud-sdk
+3. initialize: gcloud init
+Login with your Google account.
 
-\f0\fs24 \cf0 Hjgiuyuyuyt hguygyut h. G iyuiu o ui ui y}
+Authenticate Python with BigQuery
+Run: gcloud auth application-default login
+This creates credentials so Python can access BigQuery.
+
+Start Jupyter
+jupyter lab
+or
+jupyter notebook
+
+Import Libraries in Python
+from google.cloud import bigquery
+import pandas as pd
+
+Create BigQuery Client
+client = bigquery.Client(project="your-project-id")
+
+Run This
+def get_table(table):
+    return bigquery.Client(project=" your-project-id ") \  
+    .list_rows(f"YourS-Scheme/DF.{table}") \           
+    .to_dataframe()   
+
+Work with Data Using Pandas
+df.info()
+df.describe()
+df.groupby("Sex")["Medal"].value_counts()
+
+Typical Workflow
+BigQuery
+   ↓
+Python BigQuery Client
+   ↓
+Pandas DataFrame
+   ↓
+Analysis / Visualization
+<img width="432" height="639" alt="image" src="https://github.com/user-attachments/assets/5db64704-ed29-4077-966a-270acca1bc69" />
