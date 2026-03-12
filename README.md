@@ -40,4 +40,3 @@ Python BigQuery Client
 Pandas DataFrame
    ↓
 Analysis / Visualization
-<img width="432" height="639" alt="image" src="https://github.com/user-attachments/assets/5db64704-ed29-4077-966a-270acca1bc69" />
