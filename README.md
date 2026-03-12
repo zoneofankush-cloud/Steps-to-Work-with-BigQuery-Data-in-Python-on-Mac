@@ -1,51 +1,82 @@
-# How to Work with BigQuery Data using Python on macOS
+<h2>How to Work with BigQuery Data using Python on macOS</h2>
 
-### 1. Install Required Libraries
-Open your terminal and install the necessary Python packages:
-pip install google-cloud-bigquery pandas db-dtypes
+<p><strong>1. Install Required Libraries</strong><br>
+Open Terminal and install the required Python packages:</p>
 
-Next, install the Google Cloud SDK via Homebrew:
-brew install --cask google-cloud-sdk
+<pre><code>pip install google-cloud-bigquery pandas db-dtypes
+</code></pre>
 
-Finally, initialize the SDK and log in with your Google account:
-gcloud init
+<p>Install Google Cloud SDK using Homebrew:</p>
 
-### 2. Authenticate Python with BigQuery
-To generate the credentials Python needs to access BigQuery, run:
-gcloud auth application-default login
+<pre><code>brew install --cask google-cloud-sdk
+</code></pre>
 
-### 3. Start Jupyter
-Launch your notebook environment by typing:
-jupyter lab
-(or use: jupyter notebook)
+<p>Initialize the SDK and log in with your Google account:</p>
 
-### 4. Import Libraries in Python
-Inside your notebook, import the required modules:
-from google.cloud import bigquery
+<pre><code>gcloud init
+</code></pre>
+
+<p><strong>2. Authenticate Python with BigQuery</strong><br>
+Generate credentials so Python can access BigQuery:</p>
+
+<pre><code>gcloud auth application-default login
+</code></pre>
+
+<p><strong>3. Start Jupyter</strong><br>
+Launch the notebook environment:</p>
+
+<pre><code>jupyter lab
+</code></pre>
+
+<p>or</p>
+
+<pre><code>jupyter notebook
+</code></pre>
+
+<p><strong>4. Import Libraries in Python</strong></p>
+
+<pre><code>from google.cloud import bigquery
 import pandas as pd
+</code></pre>
 
-### 5. Create BigQuery Client
-Set up the client connection using your specific project ID:
-client = bigquery.Client(project="your-project-id")
+<p><strong>5. Create BigQuery Client</strong><br>
+Set up the connection to your Google Cloud project:</p>
 
-### 6. Run This Function
-Define this function to fetch your tables directly into a Pandas DataFrame:
-def get_table(table):
-    return bigquery.Client(project="your-project-id") \
-    .list_rows(f"YourS-Scheme/DF.{table}") \
-    .to_dataframe()
+<pre><code>client = bigquery.Client(project="your-project-id")
+</code></pre>
 
-### 7. Work with Data Using Pandas
-Now you can analyze your data using standard Pandas methods:
-df.info()
+<p>Example:</p>
+
+<pre><code>client = bigquery.Client(project="peronal-489013")
+</code></pre>
+
+<p><strong>6. Function to Load Tables from BigQuery</strong><br>
+Define a helper function to load a table directly into a pandas DataFrame:</p>
+
+<pre><code>def get_table(table):
+    return client.list_rows(f"Athlete_Project.{table}").to_dataframe()
+</code></pre>
+
+<p>Example usage:</p>
+
+<pre><code>df = get_table("athlete_events")
+</code></pre>
+
+<p><strong>7. Work with Data Using Pandas</strong><br>
+After loading the table, you can analyze the data using pandas:</p>
+
+<pre><code>df.info()
 df.describe()
 df.groupby("Sex")["Medal"].value_counts()
+</code></pre>
 
-### Typical Workflow
-BigQuery
+<p><strong>Typical Workflow</strong></p>
+
+<pre><code>BigQuery
    ↓
 Python BigQuery Client
    ↓
 Pandas DataFrame
    ↓
 Analysis / Visualization
+</code></pre>
